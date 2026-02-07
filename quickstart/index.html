@@ -534,6 +534,28 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration-guide-0.8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.8 Migration Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -741,12 +763,25 @@ uv add agent-client-protocol
 <pre><code class="language-json">{
   &quot;agent_servers&quot;: {
     &quot;Echo Agent (Python)&quot;: {
+      &quot;type&quot;: &quot;custom&quot;,
       &quot;command&quot;: &quot;/abs/path/to/python&quot;,
       &quot;args&quot;: [
         &quot;/abs/path/to/agentclientprotocol/python-sdk/examples/echo_agent.py&quot;
       ]
     }
   }
+}
+</code></pre>
+<p>Or, if using <code>uv</code>:</p>
+<pre><code class="language-json">{
+  &quot;agent_servers&quot;: {
+      &quot;type&quot;: &quot;custom&quot;,
+      &quot;command&quot;: &quot;uv&quot;,
+      &quot;args&quot;: [
+        &quot;run&quot;,
+        &quot;/abs/path/to/agentclientprotocol/python-sdk/examples/echo_agent.py&quot;
+      ],
+    }
 }
 </code></pre>
 <p>Open the Agents panel and start the session. Each message you send should be echoed back via streamed <code>session/update</code> notifications.</p>

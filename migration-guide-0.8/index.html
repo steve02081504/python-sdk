@@ -12,13 +12,11 @@
         <meta name="author" content="Chojan Shang">
       
       
-        <link rel="canonical" href="https://agentclientprotocol.github.io/python-sdk/migration-guide-0.7/">
+        <link rel="canonical" href="https://agentclientprotocol.github.io/python-sdk/migration-guide-0.8/">
       
       
-        <link rel="prev" href="../releasing/">
+        <link rel="prev" href="../migration-guide-0.7/">
       
-      
-        <link rel="next" href="../migration-guide-0.8/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -26,7 +24,7 @@
     
     
       
-        <title>0.7 Migration Guide - Agent Client Protocol - Python SDK</title>
+        <title>0.8 Migration Guide - Agent Client Protocol - Python SDK</title>
       
     
     
@@ -80,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#migrating-to-acp-python-sdk-07" class="md-skip">
+        <a href="#migrating-to-acp-python-sdk-08" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              0.7 Migration Guide
+              0.8 Migration Guide
             
           </span>
         </div>
@@ -369,6 +367,28 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration-guide-0.7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    0.7 Migration Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -386,7 +406,7 @@
   
   
   <span class="md-ellipsis">
-    0.7 Migration Guide
+    0.8 Migration Guide
     
   </span>
   
@@ -399,7 +419,7 @@
   
   
   <span class="md-ellipsis">
-    0.7 Migration Guide
+    0.8 Migration Guide
     
   </span>
   
@@ -422,95 +442,38 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-acpschema-models-now-expose-snake_case-fields" class="md-nav__link">
+  <a href="#1-acp-schema-bumped-to-0108" class="md-nav__link">
     <span class="md-ellipsis">
-      1. acp.schema models now expose snake_case fields
+      1. ACP schema bumped to 0.10.8
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-acprun_agent-and-acpconnect_to_agent-replace-manual-connection-wiring" class="md-nav__link">
+  <a href="#2-terminalhandle-removal" class="md-nav__link">
     <span class="md-ellipsis">
-      2. acp.run_agent and acp.connect_to_agent replace manual connection wiring
+      2. TerminalHandle removal
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="2. acp.run_agent and acp.connect_to_agent replace manual connection wiring">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#updating-agents" class="md-nav__link">
-    <span class="md-ellipsis">
-      Updating agents
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#updating-clients-and-tests" class="md-nav__link">
-    <span class="md-ellipsis">
-      Updating clients and tests
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-agent-and-client-interface-methods-take-explicit-parameters" class="md-nav__link">
+  <a href="#3-larger-default-stdio-buffer-limits" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Agent and Client interface methods take explicit parameters
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Agent and Client interface methods take explicit parameters">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-changed" class="md-nav__link">
-    <span class="md-ellipsis">
-      What changed
+      3. Larger default stdio buffer limits
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#how-to-update-your-implementations" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#4-documentation-and-quickstart-updates" class="md-nav__link">
     <span class="md-ellipsis">
-      How to update your implementations
+      4. Documentation and quickstart updates
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#additional-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Additional notes
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#backward-compatibility" class="md-nav__link">
-    <span class="md-ellipsis">
-      Backward compatibility
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -518,28 +481,6 @@
   
 </nav>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../migration-guide-0.8/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    0.8 Migration Guide
-    
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -571,95 +512,38 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-acpschema-models-now-expose-snake_case-fields" class="md-nav__link">
+  <a href="#1-acp-schema-bumped-to-0108" class="md-nav__link">
     <span class="md-ellipsis">
-      1. acp.schema models now expose snake_case fields
+      1. ACP schema bumped to 0.10.8
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-acprun_agent-and-acpconnect_to_agent-replace-manual-connection-wiring" class="md-nav__link">
+  <a href="#2-terminalhandle-removal" class="md-nav__link">
     <span class="md-ellipsis">
-      2. acp.run_agent and acp.connect_to_agent replace manual connection wiring
+      2. TerminalHandle removal
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="2. acp.run_agent and acp.connect_to_agent replace manual connection wiring">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#updating-agents" class="md-nav__link">
-    <span class="md-ellipsis">
-      Updating agents
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#updating-clients-and-tests" class="md-nav__link">
-    <span class="md-ellipsis">
-      Updating clients and tests
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-agent-and-client-interface-methods-take-explicit-parameters" class="md-nav__link">
+  <a href="#3-larger-default-stdio-buffer-limits" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Agent and Client interface methods take explicit parameters
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Agent and Client interface methods take explicit parameters">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-changed" class="md-nav__link">
-    <span class="md-ellipsis">
-      What changed
+      3. Larger default stdio buffer limits
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#how-to-update-your-implementations" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#4-documentation-and-quickstart-updates" class="md-nav__link">
     <span class="md-ellipsis">
-      How to update your implementations
+      4. Documentation and quickstart updates
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#additional-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Additional notes
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#backward-compatibility" class="md-nav__link">
-    <span class="md-ellipsis">
-      Backward compatibility
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -682,99 +566,31 @@
   
 
 
-<h1 id="migrating-to-acp-python-sdk-07">Migrating to ACP Python SDK 0.7<a class="headerlink" href="#migrating-to-acp-python-sdk-07" title="Permanent link">&para;</a></h1>
-<p>ACP 0.7 reshapes the public surface so that Python-facing names, runtime helpers, and schema models line up with the evolving Agent Client Protocol schema. This guide covers the major changes in 0.7.0 and calls out the mechanical steps you need to apply in downstream agents, clients, and transports.</p>
-<h2 id="1-acpschema-models-now-expose-snake_case-fields">1. <code>acp.schema</code> models now expose <code>snake_case</code> fields<a class="headerlink" href="#1-acpschema-models-now-expose-snake_case-fields" title="Permanent link">&para;</a></h2>
+<h1 id="migrating-to-acp-python-sdk-08">Migrating to ACP Python SDK 0.8<a class="headerlink" href="#migrating-to-acp-python-sdk-08" title="Permanent link">&para;</a></h1>
+<p>ACP 0.8 keeps the 0.7 public surface but aligns the SDK with the latest ACP schema and tightens a few runtime behaviors. Most teams only need to review the updated schema and terminal helpers. This guide calls out the changes that can affect downstream agents, clients, and tests.</p>
+<h2 id="1-acp-schema-bumped-to-0108">1. ACP schema bumped to 0.10.8<a class="headerlink" href="#1-acp-schema-bumped-to-0108" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Every generated model in <code>acp.schema</code> (see <code>src/acp/schema.py</code>) now uses Pythonic attribute names such as <code>session_id</code>, <code>stop_reason</code>, and <code>field_meta</code>. The JSON aliases (e.g., <code>alias="sessionId"</code>) stay intact so over-the-wire payloads remain camelCase.</li>
-<li>Instantiating a model or accessing response values must now use the <code>snake_case</code> form:</li>
+<li>Regenerate any internal copies of ACP schema-derived artifacts against 0.10.8.</li>
+<li>If you vendor schema types, run <code>make gen-all</code> or your equivalent pipeline.</li>
+<li>Helper types now include <code>SessionInfoUpdate</code> in the <code>SessionUpdate</code> union, so downstream code that exhaustively matches update variants should include it.</li>
 </ul>
-<pre><code class="language-python"># Before (0.6 and earlier)
-PromptResponse(stopReason=&quot;end_turn&quot;)
-params.sessionId
+<h2 id="2-terminalhandle-removal">2. <code>TerminalHandle</code> removal<a class="headerlink" href="#2-terminalhandle-removal" title="Permanent link">&para;</a></h2>
+<p><code>TerminalHandle</code> is no longer part of the public API. If you referenced it directly, switch to the request/response models and terminal IDs returned by <code>CreateTerminalRequest</code>/<code>CreateTerminalResponse</code>.</p>
+<p>Typical adjustment:</p>
+<pre><code class="language-python"># Before (0.7.x)
+handle = await conn.create_terminal(...)
+await conn.terminal_output(session_id=..., terminal_id=handle.id)
 
-# After (0.7 and later)
-PromptResponse(stop_reason=&quot;end_turn&quot;)
-params.session_id
+# After (0.8.x)
+resp = await conn.create_terminal(...)
+await conn.terminal_output(session_id=..., terminal_id=resp.terminal_id)
 </code></pre>
-<ul>
-<li>If you relied on <code>model_dump()</code> to emit camelCase keys automatically, switch to <code>model_dump(by_alias=True)</code> (or use helpers such as <code>text_block</code>, <code>start_tool_call</code>, etc.) so responses continue to match the protocol.</li>
-<li><code>field_meta</code> stays available for extension data. Any extra keys that were nested under <code>_meta</code> should now be provided via keyword arguments when constructing the schema models (see section 3).</li>
-</ul>
-<h2 id="2-acprun_agent-and-acpconnect_to_agent-replace-manual-connection-wiring">2. <code>acp.run_agent</code> and <code>acp.connect_to_agent</code> replace manual connection wiring<a class="headerlink" href="#2-acprun_agent-and-acpconnect_to_agent-replace-manual-connection-wiring" title="Permanent link">&para;</a></h2>
-<p><code>AgentSideConnection</code> and <code>ClientSideConnection</code> still exist internally, but the top-level entry points now prefer the helper functions implemented in <code>src/acp/core.py</code>.</p>
-<h3 id="updating-agents">Updating agents<a class="headerlink" href="#updating-agents" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Old pattern:</li>
-</ul>
-<pre><code class="language-python">conn = AgentSideConnection(lambda conn: Agent(), writer, reader)
-await asyncio.Event().wait()  # keep running
+<h2 id="3-larger-default-stdio-buffer-limits">3. Larger default stdio buffer limits<a class="headerlink" href="#3-larger-default-stdio-buffer-limits" title="Permanent link">&para;</a></h2>
+<p>The default stdio reader limit is now 50MB to support multimodal payloads. If you run in memory-constrained environments, explicitly set <code>stdio_buffer_limit_bytes</code> when calling <code>run_agent</code>.</p>
+<pre><code class="language-python">await run_agent(agent, stdio_buffer_limit_bytes=2 * 1024 * 1024)
 </code></pre>
-<ul>
-<li>New pattern:</li>
-</ul>
-<pre><code class="language-python">await run_agent(MyAgent(), input_stream=writer, output_stream=reader)
-</code></pre>
-<ul>
-<li>When your agent just runs over stdio, call <code>await run_agent(MyAgent())</code> and the helper will acquire asyncio streams via <code>stdio_streams()</code> for you.</li>
-</ul>
-<h3 id="updating-clients-and-tests">Updating clients and tests<a class="headerlink" href="#updating-clients-and-tests" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Old pattern:</li>
-</ul>
-<pre><code class="language-python">conn = ClientSideConnection(lambda conn: MyClient(), proc.stdin, proc.stdout)
-</code></pre>
-<ul>
-<li>New pattern:</li>
-</ul>
-<pre><code class="language-python">conn = connect_to_agent(MyClient(), proc.stdin, proc.stdout)
-</code></pre>
-<ul>
-<li><code>spawn_agent_process</code> / <code>spawn_client_process</code> now accept concrete <code>Agent</code>/<code>Client</code> instances instead of factories that received the connection. Instantiate your implementation first and pass it in.</li>
-<li>Importing the legacy connection classes via <code>acp.AgentSideConnection</code> / <code>acp.ClientSideConnection</code> issues a <code>DeprecationWarning</code> (see <code>src/acp/__init__.py:82-96</code>). Update your imports to <code>run_agent</code> and <code>connect_to_agent</code> to silence the warning.</li>
-</ul>
-<h2 id="3-agent-and-client-interface-methods-take-explicit-parameters">3. <code>Agent</code> and <code>Client</code> interface methods take explicit parameters<a class="headerlink" href="#3-agent-and-client-interface-methods-take-explicit-parameters" title="Permanent link">&para;</a></h2>
-<p>Both interfaces in <code>src/acp/interfaces.py</code> now look like idiomatic Python protocols: methods use <code>snake_case</code> names and receive the individual schema fields rather than a single request model.</p>
-<h3 id="what-changed">What changed<a class="headerlink" href="#what-changed" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Method names follow <code>snake_case</code> (<code>request_permission</code>, <code>session_update</code>, <code>new_session</code>, <code>set_session_model</code>, etc.).</li>
-<li>Parameters represent the schema fields, so there is no need to unpack <code>params</code> manually.</li>
-<li>Each method is decorated with <code>@param_model(...)</code>. Combined with the <code>compatible_class</code> helper (see <code>src/acp/utils.py</code>), this keeps the camelCase wrappers alive for callers that still pass a full Pydantic request object—but those wrappers now emit <code>DeprecationWarning</code>s to encourage migration.</li>
-</ul>
-<h3 id="how-to-update-your-implementations">How to update your implementations<a class="headerlink" href="#how-to-update-your-implementations" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Rename your method overrides to their <code>snake_case</code> equivalents.</li>
-<li>Replace <code>params: Model</code> arguments with the concrete fields plus <code>**kwargs</code> to collect future <code>_meta</code> keys.</li>
-<li>Access schema data directly via those parameters.</li>
-</ol>
-<p>Example migration for an agent:</p>
-<pre><code class="language-python"># Before
-class EchoAgent:
-    async def prompt(self, params: PromptRequest) -&gt; PromptResponse:
-        text = params.prompt[0].text
-        return PromptResponse(stopReason=&quot;end_turn&quot;)
-
-# After
-class EchoAgent:
-    async def prompt(self, prompt, session_id, **kwargs) -&gt; PromptResponse:
-        text = prompt[0].text
-        return PromptResponse(stop_reason=&quot;end_turn&quot;)
-</code></pre>
-<p>Similarly, a client method such as <code>requestPermission</code> becomes:</p>
-<pre><code class="language-python">class RecordingClient(Client):
-    async def request_permission(self, options, session_id, tool_call, **kwargs):
-        ...
-</code></pre>
-<h3 id="additional-notes">Additional notes<a class="headerlink" href="#additional-notes" title="Permanent link">&para;</a></h3>
-<ul>
-<li>The connection layers automatically assemble the right request/response models using the <code>param_model</code> metadata, so callers do not need to build Pydantic objects manually anymore.</li>
-<li>For extension points (<code>field_meta</code>), pass keyword arguments from the connection into your handler signature: they arrive inside <code>**kwargs</code>.</li>
-</ul>
-<h3 id="backward-compatibility">Backward compatibility<a class="headerlink" href="#backward-compatibility" title="Permanent link">&para;</a></h3>
-<ul>
-<li>The change should be 100% backward compatible as long as you update your method names and signatures. The <code>compatible_class</code> wrapper ensures that existing callers passing full request models continue to work. The old style API will remain functional before the next major release(1.0).</li>
-<li>Because camelCase wrappers remain for now, you can migrate file-by-file while still running against ACP 0.7. Just watch for the new deprecation warnings in your logs/tests.</li>
-</ul>
+<h2 id="4-documentation-and-quickstart-updates">4. Documentation and quickstart updates<a class="headerlink" href="#4-documentation-and-quickstart-updates" title="Permanent link">&para;</a></h2>
+<p>Docs and settings examples have been refreshed for ACP 0.10.8. If you maintain internal onboarding material, sync it with the latest docs in <code>docs/</code>.</p>
 
 
 

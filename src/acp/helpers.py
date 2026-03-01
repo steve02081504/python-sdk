@@ -5,6 +5,7 @@ from typing import Any
 
 from .schema import (
     AgentMessageChunk,
+    AgentMessageClear,
     AgentPlanUpdate,
     AgentThoughtChunk,
     AudioContentBlock,
@@ -39,6 +40,7 @@ ContentBlock = (
 
 SessionUpdate = (
     AgentMessageChunk
+    | AgentMessageClear
     | AgentPlanUpdate
     | AgentThoughtChunk
     | AvailableCommandsUpdate
@@ -53,6 +55,7 @@ ToolCallContentVariant = ContentToolCallContent | FileEditToolCallContent | Term
 
 __all__ = [
     "audio_block",
+    "clear_agent_message",
     "embedded_blob_resource",
     "embedded_text_resource",
     "image_block",
@@ -165,6 +168,14 @@ def update_agent_message(content: ContentBlock) -> AgentMessageChunk:
 
 def update_agent_message_text(text: str) -> AgentMessageChunk:
     return update_agent_message(text_block(text))
+
+
+def clear_agent_message() -> AgentMessageClear:
+    """Clear the accumulated streamed content for the current agent message.
+
+    Subsequent agent_message_chunk updates will start appending from empty.
+    """
+    return AgentMessageClear(session_update="agent_message_clear")
 
 
 def update_agent_thought(content: ContentBlock) -> AgentThoughtChunk:

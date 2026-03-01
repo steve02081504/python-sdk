@@ -9,6 +9,7 @@ from pydantic import BaseModel
 
 from acp import (
     audio_block,
+    clear_agent_message,
     embedded_blob_resource,
     embedded_text_resource,
     image_block,
@@ -30,6 +31,7 @@ from acp import (
 )
 from acp.schema import (
     AgentMessageChunk,
+    AgentMessageClear,
     AgentPlanUpdate,
     AgentThoughtChunk,
     AllowedOutcome,
@@ -86,6 +88,7 @@ GOLDEN_CASES: dict[str, type[BaseModel]] = {
     "request_permission_request": RequestPermissionRequest,
     "request_permission_response_selected": RequestPermissionResponse,
     "session_update_agent_message_chunk": AgentMessageChunk,
+    "session_update_agent_message_clear": AgentMessageClear,
     "session_update_agent_thought_chunk": AgentThoughtChunk,
     "session_update_config_option_update": ConfigOptionUpdate,
     "session_update_plan": AgentPlanUpdate,
@@ -144,6 +147,7 @@ GOLDEN_BUILDERS: dict[str, Callable[[], BaseModel]] = {
     "tool_content_terminal": lambda: tool_terminal_ref("term_001"),
     "session_update_user_message_chunk": lambda: update_user_message_text("What's the capital of France?"),
     "session_update_agent_message_chunk": lambda: update_agent_message_text("The capital of France is Paris."),
+    "session_update_agent_message_clear": lambda: clear_agent_message(),
     "session_update_agent_thought_chunk": lambda: update_agent_thought_text("Thinking about best approach..."),
     "session_update_plan": lambda: update_plan([
         plan_entry(

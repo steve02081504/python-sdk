@@ -531,6 +531,20 @@
       ],
       "description": "The input specification for a command."
     },
+    "AgentMessageClear": {
+      "description": "Clear the accumulated streamed content for the current agent message. Subsequent agent_message_chunk updates start appending from empty.",
+      "properties": {
+        "_meta": {
+          "additionalProperties": true,
+          "description": "The _meta property is reserved by ACP to allow clients and agents to attach additional\nmetadata to their interactions. Implementations MUST NOT make assumptions about values at\nthese keys.\n\nSee protocol docs: [Extensibility](https://agentclientprotocol.com/protocol/extensibility)",
+          "type": [
+            "object",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
     "AvailableCommandsUpdate": {
       "description": "Available commands are ready or have changed",
       "properties": {
@@ -3760,6 +3774,24 @@
           "properties": {
             "sessionUpdate": {
               "const": "usage_update",
+              "type": "string"
+            }
+          },
+          "required": [
+            "sessionUpdate"
+          ],
+          "type": "object"
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "#/$defs/AgentMessageClear"
+            }
+          ],
+          "description": "Clear the accumulated streamed content for the current agent message. Subsequent agent_message_chunk updates start appending from empty.",
+          "properties": {
+            "sessionUpdate": {
+              "const": "agent_message_clear",
               "type": "string"
             }
           },

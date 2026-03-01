@@ -2238,6 +2238,19 @@ class AgentThoughtChunk(ContentChunk):
     session_update: Annotated[Literal["agent_thought_chunk"], Field(alias="sessionUpdate")]
 
 
+class AgentMessageClear(BaseModel):
+    # Clear the accumulated streamed content for the current agent message.
+    # Subsequent agent_message_chunk updates start appending from empty.
+    field_meta: Annotated[
+        Optional[Dict[str, Any]],
+        Field(
+            alias="_meta",
+            description="The _meta property is reserved by ACP to allow clients and agents to attach additional\nmetadata to their interactions. Implementations MUST NOT make assumptions about values at\nthese keys.\n\nSee protocol docs: [Extensibility](https://agentclientprotocol.com/protocol/extensibility)",
+        ),
+    ] = None
+    session_update: Annotated[Literal["agent_message_clear"], Field(alias="sessionUpdate")]
+
+
 class ClientRequest(BaseModel):
     # JSON RPC Request Id
     #
@@ -2831,6 +2844,7 @@ class SessionNotification(BaseModel):
             ConfigOptionUpdate,
             SessionInfoUpdate,
             UsageUpdate,
+            AgentMessageClear,
         ],
         Field(description="The actual update content.", discriminator="session_update"),
     ]

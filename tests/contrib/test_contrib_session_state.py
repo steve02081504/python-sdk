@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import pytest
 
+from acp import clear_agent_message
 from acp.contrib.session_state import SessionAccumulator
 from acp.schema import (
     AgentMessageChunk,
@@ -105,6 +106,19 @@ def test_session_accumulator_tracks_messages_and_commands():
     assert isinstance(agent_content, TextContentBlock)
     assert user_content.text == "Hello"
     assert agent_content.text == "Hi!"
+
+
+def test_session_accumulator_agent_message_clear_clears_accumulated_chunks():
+    acc = SessionAccumulator()
+    acc.apply(notification("s", AgentMessageChunk(session_update="agent_message_chunk", content=TextContentBlock(type="text", text="Thinking..."))))
+    acc.apply(notification("s", AgentMessageChunk(session_update="agent_message_chunk", content=TextContentBlock(type="text", text=" draft"))))
+    assert len(acc.snapshot().agent_messages) == 2
+    acc.apply(notification("s", clear_agent_message()))
+    assert len(acc.snapshot().agent_messages) == 0
+    acc.apply(notification("s", AgentMessageChunk(session_update="agent_message_chunk", content=TextContentBlock(type="text", text="Final result."))))
+    snapshot = acc.snapshot()
+    assert len(snapshot.agent_messages) == 1
+    assert snapshot.agent_messages[0].content.text == "Final result."
 
 
 def test_session_accumulator_auto_resets_on_new_session():

@@ -8,6 +8,7 @@ from pydantic import BaseModel, ConfigDict
 
 from ..schema import (
     AgentMessageChunk,
+    AgentMessageClear,
     AgentPlanUpdate,
     AgentThoughtChunk,
     AvailableCommand,
@@ -236,6 +237,10 @@ class SessionAccumulator:
 
         if isinstance(update, AgentMessageChunk):
             self._agent_messages.append(update.model_copy(deep=True))
+            return
+
+        if isinstance(update, AgentMessageClear):
+            self._agent_messages.clear()
             return
 
         if isinstance(update, AgentThoughtChunk):
